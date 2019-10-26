@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package com.basic.framework.api.test.config;
+
+/**
+ * @author gmc
+ * @see 资源服务器oauth2配置
+ */
+public class SecurityConfig {
+
+}

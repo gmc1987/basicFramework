@@ -1,0 +1,11 @@
+INDEX VERSION 1.4+/Users/gmc/个人/basic-framework/projectBasicFramework/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2975618469.index
+1510481215.index
+705300025.index
+543260559.index
+2574414048.index
+1632878286.index
+2767797733.index
+3540310882.index
+1833045247.index
+1320972218.index

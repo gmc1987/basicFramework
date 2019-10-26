@@ -1,0 +1,64 @@
+server:
+  port: 8801
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-register-center1:8000/eureka, http://service-register-center2:8001/eureka
+  
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: auth-center
+            client-id: client
+            client-secret: secret
+            authorization-grant-type: authorization_code,refresh_token,password
+            redirect-uri: 'http://localhost:8080/website/login.html'
+            client-name: gateway
+        provider:
+          basic-oauth:
+            authorization-uri: http://localhost:8801/api/auth/oauth/authorize 
+            user-info-uri: http://localhost:8801/api/auth/user
+            token-uri: http://localhost:8801/api/auth/oauth/token
+            user-name-attribute: user_name
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+      routes:
+      - id: api-test
+        uri:  lb://API-TEST
+        predicates:
+        - Path=/api/test/**
+        filters:
+          - TokenRelay=
+          - RemoveRequestHeader=Cookie
+          - name: Hystrix
+            args:
+              name: authHystrixCommand
+              fallbackUri: forward:/apiHystrix/hystrixTimeout
+      - id: auth-center
+        uri:  lb://AUTH-CENTER
+        predicates:
+        - Path=/api/auth/**
+        filters:
+        - StripPrefix=2
+          

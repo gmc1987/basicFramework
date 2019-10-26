@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="api-test"/>
+<aop-project name="auth-center"/>
+<aop-project name="register-center"/>
+<aop-project name="service-platform"/>
+<aop-project name="api-gateway"/>
+</aop-reference-model>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 0 elements to &apos;api-gateway/src/main/java/com.basic.framework.api.gateway.jwt&apos;&#x0A;- Destination element: &apos;api-gateway/src/main/java/com.basic.framework.api.gateway.jwt&apos;" description="Copy compilation units" destination="=api-gateway/src\/main\/java&lt;com.basic.framework.api.gateway.jwt" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1571050250386" units="0" version="1.0"/>
+</session>

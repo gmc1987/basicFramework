@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 2 elements from project &apos;api-gateway&apos;&#x0A;- Original project: &apos;api-gateway&apos;&#x0A;- Original elements:&#x0A;     api-gateway/src/main/java/com.basic.framework.api.gateway.filter&#x0A;     api-gateway/src/main/java/com.basic.framework.api.gateway.jwt" description="Delete elements" element1="/src\/main\/java&lt;com.basic.framework.api.gateway.jwt" element2="/src\/main\/java&lt;com.basic.framework.api.gateway.filter" elements="2" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1572056833941" subPackages="false" version="1.0"/>
+</session>

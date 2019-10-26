@@ -1,0 +1,17 @@
+server:
+  port: 8809
+  
+spring:
+  application:
+    name: api-test
+    
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8801/api/auth/token_keys
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-register-center1:8000/eureka, http://service-register-center2:8001/eureka
