@@ -5,15 +5,15 @@ package com.basic.framework.auth.Idao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.basic.framework.auth.pojo.BasicUser;
+import com.basic.framework.auth.pojo.PlatformUser;
 
 /**
  * @author gmc
  *
  */
-public interface IBasicUserRepository extends JpaRepository<BasicUser, Long> {
+public interface IBasicUserRepository extends JpaRepository<PlatformUser, Long> {
 
-	public BasicUser findByUserId(Long userId);
+	public PlatformUser findByUserId(Long userId);
 	
-	public BasicUser findByUserCode(String userCode);
+	public PlatformUser findByUserCode(String userCode);
 }

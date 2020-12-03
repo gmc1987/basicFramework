@@ -5,16 +5,18 @@ package com.basic.framework.auth.pojo;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -25,9 +27,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name="basic_user_role", indexes= {@Index(columnList="user_role_id", unique=true),
-											@Index(columnList="user_id", unique=false),
-											@Index(columnList="role_id", unique=false)})
+@DynamicUpdate
+@Table(name="basic_user_role")
 public class BasicUserRole implements Serializable {
 
 	/**
@@ -36,32 +37,32 @@ public class BasicUserRole implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="user_role_id", nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long userRoleId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable=false)
-	private BasicUser user;
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@JoinColumn(name = "userId")
+	private PlatformUser userId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="role_id", nullable=false)
-	private BasicRole role;
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@JoinColumn(name = "roleId")
+	private BasicRole roleId;
 	
-	public BasicUser getUser() {
-		return user;
+	public PlatformUser getUserId() {
+		return userId;
 	}
 
-	public void setUser(BasicUser user) {
-		this.user = user;
+	public void setUserId(PlatformUser userId) {
+		this.userId = userId;
 	}
 
-	public BasicRole getRole() {
-		return role;
+	public BasicRole getRoleId() {
+		return roleId;
 	}
 
-	public void setRole(BasicRole role) {
-		this.role = role;
+	public void setRoleId(BasicRole roleId) {
+		this.roleId = roleId;
 	}
 
 	public Long getUserRoleId() {

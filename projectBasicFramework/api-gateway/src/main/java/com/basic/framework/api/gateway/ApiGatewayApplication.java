@@ -8,9 +8,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 public class ApiGatewayApplication {
 	
-//	@Autowired
-//	private TokenRelayGatewayFilterFactory  tokenRelayGatewayFilterFactory;
-	
 	public static void main(String[] args) {
 		SpringApplication.run(ApiGatewayApplication.class, args);
 	}

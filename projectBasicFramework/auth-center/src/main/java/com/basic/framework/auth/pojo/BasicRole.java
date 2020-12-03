@@ -28,8 +28,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name="basic_role", indexes= {@Index(columnList="role_id", unique=true),
-									@Index(columnList="role_code", unique=true)})
+@Table(name="basic_role", indexes= {@Index(columnList="id", unique=true),
+									@Index(columnList="roleCode", unique=true)})
 public class BasicRole implements Serializable {
 
 	/**
@@ -38,39 +38,35 @@ public class BasicRole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="role_id", nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long roleId;
 	
-	@Column(name="role_code", length=32, nullable=false)
+	@Column(length=32, nullable=false)
 	private String roleCode;
 	
-	@Column(name="role_name", length=225, nullable=false)
+	@Column(length=225, nullable=false)
 	private String roleName;
 	
-	@Column(name="role_status",  nullable=false)
+	@Column(nullable=false)
 	private Integer roleStatus;
 	
-	@Column(name="create_date", nullable=false)
+	@Column(nullable=false)
 	private Date createDate;
 	
-	@Column(name="create_by", nullable=false)
+	@Column(nullable=false)
 	private Long createBy;
 	
-	@Column(name="last_update_date", nullable=true)
+	@Column(nullable=true)
 	private Date LastUpdateDate;
 	
-	@Column(name="last_update_by", nullable=true)
+	@Column(nullable=true)
 	private Long lastUpdateBy;
 	
 	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="role")
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="roleId")
 	private Set<BasicAuthorization> authorization;
 	
-	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="role")
-	private Set<BasicUserRole> userRole;
-
 	public Long getRoleId() {
 		return roleId;
 	}
@@ -143,12 +139,4 @@ public class BasicRole implements Serializable {
 		this.authorization = authorization;
 	}
 
-	public Set<BasicUserRole> getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(Set<BasicUserRole> userRole) {
-		this.userRole = userRole;
-	}
-	
 }

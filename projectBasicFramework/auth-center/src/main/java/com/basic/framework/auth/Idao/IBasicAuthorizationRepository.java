@@ -16,5 +16,5 @@ import com.basic.framework.auth.pojo.BasicRole;
  */
 public interface IBasicAuthorizationRepository extends JpaRepository<BasicAuthorization, Long> {
 
-	public List<BasicAuthorization> findByRole(BasicRole role);
+	public List<BasicAuthorization> findByRoleId(BasicRole role);
 }

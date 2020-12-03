@@ -7,6 +7,8 @@ eureka:
       defaultZone: http://service-register-center1:8000/eureka, http://service-register-center2:8001/eureka
   
 spring:
+  main:
+    allow-bean-definition-overriding: true
 #  autoconfigure:
 #    exclude: org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
 #  security:
@@ -17,12 +19,12 @@ spring:
 #            provider: auth-center
 #            client-id: client
 #            client-secret: secret
-#            authorization-grant-type: authorization_code
-#            redirect-uri: 'http://localhost:8080/website/login.html'
-#            client-name: gateway
+#            authorization-grant-type: password
+#            redirect-uri: 'http://localhost:8080/'
+#            client-name: client
 #        provider:
 #          auth-center:
-#            authorization-uri: http://localhost:8801/api/auth/oauth/authorize 
+##            authorization-uri: http://localhost:8801/api/auth/oauth/authorize 
 #            user-info-uri: http://localhost:8801/api/auth/user
 #            token-uri: http://localhost:8801/api/auth/oauth/token
 #            user-name-attribute: user_name
@@ -32,7 +34,7 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: false
+          enabled: true
           lower-case-service-id: true
 #      globalcors:
 #        cors-configurations:
@@ -49,8 +51,9 @@ spring:
         predicates:
         - Path=/api/test/**
         filters:
-          - TokenRelay=
-          - RemoveRequestHeader=Cookie
+          - StripPrefix=1
+#          - TokenRelay=
+#          - RemoveRequestHeader=Cookie
           - name: Hystrix
             args:
               name: authHystrixCommand
@@ -58,7 +61,13 @@ spring:
       - id: auth-center
         uri:  lb://AUTH-CENTER
         predicates:
-        - Path=/api/auth/**
+          - Path=/auth/**
         filters:
-        - StripPrefix=2
+          - StripPrefix=1
+      - id: service-platform
+        uri:  lb://SERVICE-PLATFORM
+        predicates:
+          - Path=/api/platform/**
+        filters:
+          - StripPrefix=1
           

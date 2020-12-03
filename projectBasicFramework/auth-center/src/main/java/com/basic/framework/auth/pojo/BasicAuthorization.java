@@ -5,6 +5,7 @@ package com.basic.framework.auth.pojo;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name="basic_authorization", indexes= {@Index(columnList="authorization_id", unique=true)})
+@Table(name="basic_authorization", indexes= {@Index(columnList="id", unique=true)})
 public class BasicAuthorization implements Serializable {
 
 	/**
@@ -34,16 +35,16 @@ public class BasicAuthorization implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="authorization_id", nullable=false)
+	@Column(name="id", nullable=false)
 	private Long authorizationId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="role_id")
-	private BasicRole role;
+	@ManyToOne(fetch=FetchType.LAZY, cascade= {CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinColumn(name="roleId", nullable=false)
+	private BasicRole roleId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="menu_id")
-	private BasicMenus menu;
+	@ManyToOne(fetch=FetchType.LAZY, cascade= {CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinColumn(name="menuId", nullable=false)
+	private BasicMenus menuId;
 	
 	@Column(name="operations", length=225, nullable=true)
 	private String operations;
@@ -56,20 +57,20 @@ public class BasicAuthorization implements Serializable {
 		this.authorizationId = authorizationId;
 	}
 
-	public BasicRole getRole() {
-		return role;
+	public BasicRole getRoleId() {
+		return roleId;
 	}
 
-	public void setRole(BasicRole role) {
-		this.role = role;
+	public void setRoleId(BasicRole role) {
+		this.roleId = role;
 	}
 
-	public BasicMenus getMenu() {
-		return menu;
+	public BasicMenus getMenuId() {
+		return menuId;
 	}
 
-	public void setMenu(BasicMenus menu) {
-		this.menu = menu;
+	public void setMenuId(BasicMenus menu) {
+		this.menuId = menu;
 	}
 
 	public String getOperations() {

@@ -86,7 +86,7 @@ public class BasicMenus implements Serializable {
 	private Set<BasicMenus> childMenus;
 	
 	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="menu")
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="menuId")
 	private Set<BasicAuthorization> authorizations;
 	
 	/**

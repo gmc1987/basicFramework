@@ -7,12 +7,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import com.basic.framework.auth.pojo.BasicAccount;
+import com.basic.framework.auth.pojo.Account;
 import com.basic.framework.auth.pojo.BasicAuthorization;
 import com.basic.framework.auth.pojo.BasicMenus;
 import com.basic.framework.auth.pojo.BasicRole;
-import com.basic.framework.auth.pojo.BasicUser;
 import com.basic.framework.auth.pojo.BasicUserRole;
+import com.basic.framework.auth.pojo.PlatformUser;
 
 /**
  * @author gmc
@@ -25,11 +25,11 @@ public class AuthUserEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private BasicUser basicUser;
+	private PlatformUser platformUser;
 
 	private BasicRole basicRole;
 
-	private BasicAccount basicAccount;
+	private Account account;
 
 	private Map<String, List<BasicMenus>> menus;
 
@@ -40,22 +40,22 @@ public class AuthUserEntity implements Serializable {
 	public AuthUserEntity() {
 	}
 
-	public AuthUserEntity(BasicUser basicUser, BasicRole basicRole, BasicAccount basicAccount, Map<String, List<BasicMenus>> menus,
+	public AuthUserEntity(PlatformUser platformUser, BasicRole basicRole, Account account, Map<String, List<BasicMenus>> menus,
 			List<BasicUserRole> userRoles, Map<String, List<BasicAuthorization>> basicAuthorizations) {
-		this.basicUser = basicUser;
+		this.platformUser = platformUser;
 		this.basicRole = basicRole;
-		this.basicAccount = basicAccount;
+		this.account = account;
 		this.menus = menus;
 		this.userRoles = userRoles;
 		this.basicAuthorizations = basicAuthorizations;
 	}
 
-	public BasicUser getBasicUser() {
-		return basicUser;
+	public PlatformUser getPlatformUser() {
+		return platformUser;
 	}
 
-	public void setBasicUser(BasicUser basicUser) {
-		this.basicUser = basicUser;
+	public void setPlatformUser(PlatformUser platformUser) {
+		this.platformUser = platformUser;
 	}
 
 	public BasicRole getBasicRole() {
@@ -66,12 +66,12 @@ public class AuthUserEntity implements Serializable {
 		this.basicRole = basicRole;
 	}
 
-	public BasicAccount getBasicAccount() {
-		return basicAccount;
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setBasicAccount(BasicAccount basicAccount) {
-		this.basicAccount = basicAccount;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public Map<String, List<BasicMenus>> getMenus() {

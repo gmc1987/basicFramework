@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.basic.framework.auth.Idao.IBasicAccountRepository;
-import com.basic.framework.auth.pojo.BasicAccount;
-import com.basic.framework.auth.pojo.BasicUser;
+import com.basic.framework.auth.pojo.Account;
+import com.basic.framework.auth.pojo.PlatformUser;
 
 /**
  * @author gmc
@@ -22,10 +22,10 @@ public class BasicAccountService {
 	@Autowired
 	private IBasicAccountRepository basicAccountRepository;
 	
-	public BasicAccount findByUser(BasicUser user) throws Exception{
+	public Account findByUser(PlatformUser user) throws Exception{
 		if(ObjectUtils.isEmpty(user)) {
 			throw new Exception("参数错误[user]，用户信息为空");
 		}
-		return basicAccountRepository.findByUser(user);
+		return basicAccountRepository.findByAccountId(user.getAccount().getAccountId());
 	}
 }

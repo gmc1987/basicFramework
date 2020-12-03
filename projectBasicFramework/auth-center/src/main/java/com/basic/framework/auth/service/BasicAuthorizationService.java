@@ -30,7 +30,7 @@ public class BasicAuthorizationService {
 		if(ObjectUtils.isEmpty(role)) {
 			throw new Exception("参数错误[role],角色参数为空");
 		}
-		return basicAuthorizationRepository.findByRole(role);
+		return basicAuthorizationRepository.findByRoleId(role);
 	}
 	
 	@Transactional

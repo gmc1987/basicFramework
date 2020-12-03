@@ -4,8 +4,8 @@
 package com.basic.framework.auth.authorization.provider;
 
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.basic.framework.auth.authorization.passwordEncoder.MyPasswordEncoder;
 import com.basic.framework.auth.authorization.service.UserDetailsServiceImpl;
 
 /**
@@ -16,7 +16,7 @@ public class MyDaoAuthenticationProvider extends DaoAuthenticationProvider {
 
 	public MyDaoAuthenticationProvider() {}
 	
-	public MyDaoAuthenticationProvider(UserDetailsServiceImpl userServiceDetails, PasswordEncoder passwordEncode) {
+	public MyDaoAuthenticationProvider(UserDetailsServiceImpl userServiceDetails, MyPasswordEncoder passwordEncode) {
 		setUserDetailsService(userServiceDetails);
 		setPasswordEncoder(passwordEncode);
 	}

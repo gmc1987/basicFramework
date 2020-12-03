@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.basic.framework.auth.pojo.BasicAccount;
-import com.basic.framework.auth.pojo.BasicUser;
+import com.basic.framework.auth.pojo.Account;
+import com.basic.framework.auth.pojo.PlatformUser;
 import com.basic.framework.auth.service.BasicUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,22 +23,20 @@ public class AuthCenterApplicationTests {
 	@Test
 	public void userAddTest() throws Exception {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		BasicUser user = new BasicUser();
+		PlatformUser user = new PlatformUser();
 		user.setUserCode("00001");
 		user.setUserStatus(0);
-		user.setNickName("admin");
-		user.setLock(false);
-		user.setPassword(encoder.encode("123456"));
+		user.setUserName("admin");
 		user.setCreateBy(1L);
 		user.setCreateDate(new Date());
 		
-		BasicAccount account = new BasicAccount();
-		account.setAccountCode("00001");
-		account.setAccountName("高铭潮");
-		account.setRegisterDate(new Date());
-		account.setCreateBy(1L);
+		Account account = new Account();
+		account.setAccCode("00001");
+		account.setAccName("高铭潮");
+		account.setAccPassword(encoder.encode("123456"));
 		account.setCreateDate(new Date());
-		account.setUser(user);
+		account.setCreateBy(1L);
+		account.setPlatformUserId(user);
 		
 		user.setAccount(account);
 		
