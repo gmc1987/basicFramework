@@ -14,8 +14,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.basic.netty.message.common.MessageType;
-
 /**
  * @author gmc
  *
