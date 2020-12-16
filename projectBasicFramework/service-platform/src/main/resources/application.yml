@@ -75,8 +75,8 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    timeout:
-      seconds: 120
+    timeout: 120
+#      seconds: 120
     jedis:
       pool:
         max-active: 10
@@ -102,5 +102,5 @@ security:
       jwt:
         key-value: 1q2w3e4rasdf
       id: basicPlatform
-      service-id: dataPlatform
+      service-id: basicPlatform
 
