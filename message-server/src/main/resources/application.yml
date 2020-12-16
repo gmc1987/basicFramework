@@ -1,0 +1,100 @@
+server:
+  port: 8805
+
+spring:
+  application:
+    name: message-server
+    
+#=================================================================
+#data Source configure
+#=================================================================
+  datasource:
+    druid:
+      filter:
+        stat:
+          slow-sql-millis: 5000
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico
+        session-stat-enable: true
+        session-stat-max-count: 10
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: true
+        login-username: admin
+        login-password: admin
+      one:
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3306/basicDB?useUnicode=true&characterEncoding=utf8
+        username: root
+        password: admin
+        driverClassName: com.mysql.jdbc.Driver
+        initialSize: 5
+        minIdle: 5
+        maxActive: 100
+        maxWait: 30000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 30000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        filters: stat
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        maxOpenPreparedStatements: 20
+        connectionProperties: druid.stat.mergeSql=true;
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      redisson-config: classpath:conf/hibernate-redis.properties
+      hibernate:
+        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        generate_statistics: true
+#       enable_lazy_load_no_trans: true
+#        cache:
+#          use_second_level_cache: true
+#          use_query_cache: true
+#          use_structured_entries: true
+#          region:
+#            factory_class: org.hibernate.cache.redis.hibernate52.SingletonRedisRegionFactory
+#            region_prefix: hibernate
+#      redis:
+#        expiryInSeconds:
+#          default: 120
+#          hibernate:
+#            common: 0
+#            account: 1200
+            
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 120
+#      seconds: 120
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 0
+        max-wait: -1
+  
+    
+message:
+ server:
+  port: 9003
+    
+#=================================================================
+#eureka service configure
+#=================================================================
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-register-center1:8000/eureka, http://service-register-center2:8001/eureka
+
