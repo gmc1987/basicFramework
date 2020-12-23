@@ -36,14 +36,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @SqlResultSetMapping(name="SideUserDto", classes= {
 		@ConstructorResult(targetClass=PlatformUserDto.class,
 				columns={@ColumnResult(name="userId", type=Long.class),
-						@ColumnResult(name="userCode", type=String.class),
-						@ColumnResult(name="userName", type=String.class),
-						@ColumnResult(name="userStatus", type=Integer.class),
-						@ColumnResult(name="account", type=Long.class),
+						@ColumnResult(name="user_code", type=String.class),
+						@ColumnResult(name="user_name", type=String.class),
+						@ColumnResult(name="user_status", type=Integer.class),
+						@ColumnResult(name="account_id", type=Long.class),
 						@ColumnResult(name="roleId", type=String.class),
 						@ColumnResult(name="roleName", type=String.class),
-						@ColumnResult(name="createBy", type=Long.class),
-						@ColumnResult(name="createDate", type=Date.class)
+						@ColumnResult(name="create_by", type=Long.class),
+						@ColumnResult(name="create_date", type=Date.class)
 				}
 		)
 })
@@ -71,38 +71,38 @@ public class PlatformUser implements Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long userId;
 	
-	@Column(length=32, nullable=false)
+	@Column(name = "user_code", length=32, nullable=false)
 	private String userCode;
 	
-	@Column(length=100, nullable=false)
+	@Column(name = "user_name", length=100, nullable=false)
 	private String userName;
 	
-	@Column
+	@Column(name = "create_date")
 	private Date createDate;
 	
-	@Column
+	@Column(name = "last_update_date")
 	private Date lastUpdateDate;
 	
-	@Column(length=32, nullable=false)
+	@Column(name = "create_by" ,length=32, nullable=false)
 	private Long createBy;
 	
-	@Column(length=32, nullable=true)
+	@Column(name = "last_update_by" ,length=32, nullable=true)
 	private Long lastUpdateBy;
 	
 	/**
 	 * 0-正常，1-冻结，2-失效
 	 */
-	@Column(nullable=false)
+	@Column(name = "user_status", nullable=false)
 	private Integer userStatus;
 	
 	/**
 	 * 0-系统用户，1-普通用户
 	 */
-	@Column(nullable=false)
+	@Column(name = "is_system_user" ,nullable=false)
 	private Integer isSystemUser;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
- 	@JoinColumn(name="account", insertable=true, nullable=true)
+ 	@JoinColumn(name="account_id", insertable=true, nullable=true)
 	private Account account;
 
 

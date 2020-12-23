@@ -33,9 +33,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @DynamicUpdate
 @Table(name="basic_account", indexes= {@Index(columnList = "id"), 
-		@Index(columnList = "accCode"), 
-		@Index(columnList = "accName"),
-		@Index(columnList = "accStatus")})
+		@Index(columnList = "account_code"), 
+		@Index(columnList = "account_name"),
+		@Index(columnList = "acc_status")})
 public class Account implements Serializable {
 	
 	public Account() {}
@@ -68,43 +68,43 @@ public class Account implements Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long accountId;
 	
-	@Column(length=32, nullable=false)
+	@Column(name = "account_code", length=32, nullable=false)
 	private String accCode;
 	
-	@Column(length=100, nullable=false)
+	@Column(name = "account_name", length=100, nullable=false)
 	private String accName;
 	
 	@JsonIgnore
-	@Column(length=100, nullable=false)
+	@Column(name="acc_password", length=100, nullable=false)
 	private String accPassword;
 	
-	@Column(length=20, nullable=true)
+	@Column(name = "tel", length=20, nullable=true)
 	private String tel;
 	
-	@Column(nullable=true)
+	@Column(name = "sex", nullable=true)
 	private Character accSex;
 	
-	@Column(nullable=true)
+	@Column(name = "acc_birthday", nullable=true)
 	private Date accBirthday;
 	
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
- 	@JoinColumn(name="PlatformUserId", insertable=true, nullable=true)
-	private PlatformUser PlatformUserId;
+ 	@JoinColumn(name="user_id", insertable=true, nullable=true)
+	private PlatformUser platformUserId;
 	
-	@Column(nullable=false)
+	@Column(name = "create_date", nullable=false)
 	private Date createDate;
 	
-	@Column(nullable=false)
+	@Column(name = "create_by", nullable=false)
 	private Long createBy;
 	
-	@Column(nullable=true)
+	@Column(name = "last_update_date", nullable=true)
 	private Date lastUpdateDate;
 	
-	@Column(length=32, nullable=true)
+	@Column(name = "last_update_by", length=32, nullable=true)
 	private Long lastUpdateBy;
 	
-	@Column(nullable=false)
+	@Column(name = "acc_status", nullable=false)
 	private Integer accStatus;
 	
 	@Transient
@@ -164,11 +164,11 @@ public class Account implements Serializable {
 	}
 
 	public PlatformUser getPlatformUserId() {
-		return PlatformUserId;
+		return platformUserId;
 	}
 
-	public void setPlatformUserId(PlatformUser PlatformUserId) {
-		this.PlatformUserId = PlatformUserId;
+	public void setPlatformUserId(PlatformUser platformUserId) {
+		this.platformUserId = platformUserId;
 	}
 
 	public Date getCreateDate() {
