@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.basic.framework.auth.Idao.IBasicUserRoleRepository;
+import com.basic.framework.auth.pojo.BasicUser;
 import com.basic.framework.auth.pojo.BasicUserRole;
-import com.basic.framework.auth.pojo.PlatformUser;
 
 /**
  * @author gmc
@@ -25,11 +25,11 @@ public class BasicUserRoleService {
 	@Autowired
 	private IBasicUserRoleRepository basicUserRoleRepository;
 	
-	public List<BasicUserRole> findByUser(PlatformUser user) throws Exception {
+	public List<BasicUserRole> findByUser(BasicUser user) throws Exception {
 		if(ObjectUtils.isEmpty(user)) {
 			throw new Exception("参数错误[user],用户信息不可为空");
 		}
-		return basicUserRoleRepository.findByUserId(user);
+		return basicUserRoleRepository.findByBasicUser(user);
 	}
 	
 	@Transactional

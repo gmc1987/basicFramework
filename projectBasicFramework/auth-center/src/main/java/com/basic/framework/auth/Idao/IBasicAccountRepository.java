@@ -5,13 +5,13 @@ package com.basic.framework.auth.Idao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.basic.framework.auth.pojo.Account;
+import com.basic.framework.auth.pojo.BasicAccount;
 
 /**
  * @author gmc
  *
  */
-public interface IBasicAccountRepository extends JpaRepository<Account, Long> {
+public interface IBasicAccountRepository extends JpaRepository<BasicAccount, Long> {
 
-	public Account findByAccountId(Long account);
+	public BasicAccount findByAccountId(Long account);
 }

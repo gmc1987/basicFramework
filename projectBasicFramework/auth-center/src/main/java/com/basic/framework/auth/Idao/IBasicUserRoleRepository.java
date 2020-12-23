@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.basic.framework.auth.pojo.BasicUser;
 import com.basic.framework.auth.pojo.BasicUserRole;
-import com.basic.framework.auth.pojo.PlatformUser;
 
 
 /**
@@ -17,5 +17,5 @@ import com.basic.framework.auth.pojo.PlatformUser;
  */
 public interface IBasicUserRoleRepository extends JpaRepository<BasicUserRole, Long> {
 
-	public List<BasicUserRole> findByUserId(PlatformUser userId);
+	public List<BasicUserRole> findByBasicUser(BasicUser basicUser);
 }

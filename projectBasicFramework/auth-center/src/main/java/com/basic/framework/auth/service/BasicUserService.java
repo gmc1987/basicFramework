@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.basic.framework.auth.Idao.IBasicUserRepository;
-import com.basic.framework.auth.pojo.PlatformUser;
+import com.basic.framework.auth.pojo.BasicUser;
 
 import io.micrometer.core.instrument.util.StringUtils;
 
@@ -28,7 +28,7 @@ public class BasicUserService {
 	@Autowired
 	private IBasicUserRepository iBasicUserRepository;
 	
-	public PlatformUser findUserByCode(String userCode) throws Exception {
+	public BasicUser findUserByCode(String userCode) throws Exception {
 		
 		if(StringUtils.isEmpty(userCode)) {
 			log.error("参数错误[userCode]为空");
@@ -39,7 +39,7 @@ public class BasicUserService {
 	}
 	
 	@Transactional
-	public PlatformUser userSave(PlatformUser user) throws Exception{
+	public BasicUser userSave(BasicUser user) throws Exception{
 		if(ObjectUtils.isEmpty(user)) {
 			log.error("参数错误[user]为空");
 			throw new Exception("参数错误，user不可为空");

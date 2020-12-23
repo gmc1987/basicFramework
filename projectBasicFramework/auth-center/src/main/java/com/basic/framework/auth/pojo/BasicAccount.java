@@ -47,6 +47,10 @@ public class BasicAccount implements Serializable {
 	@Column(name="account_name", length=225, nullable=true)
 	private String accountName;
 	
+	@JsonIgnore
+	@Column(length=100, nullable=false)
+	private String accPassword;
+	
 	@Column(name="sex", length=10, nullable=true)
 	private String sex;
 	
@@ -181,6 +185,14 @@ public class BasicAccount implements Serializable {
 
 	public void setUser(BasicUser user) {
 		this.user = user;
+	}
+
+	public String getAccPassword() {
+		return accPassword;
+	}
+
+	public void setAccPassword(String accPassword) {
+		this.accPassword = accPassword;
 	}
 	
 }

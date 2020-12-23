@@ -22,8 +22,8 @@ import com.basic.framework.auth.authorization.userdetails.BasicAuthUserDetails;
 import com.basic.framework.auth.pojo.BasicAuthorization;
 import com.basic.framework.auth.pojo.BasicMenus;
 import com.basic.framework.auth.pojo.BasicRole;
+import com.basic.framework.auth.pojo.BasicUser;
 import com.basic.framework.auth.pojo.BasicUserRole;
-import com.basic.framework.auth.pojo.PlatformUser;
 import com.basic.framework.auth.service.BasicAuthorizationService;
 import com.basic.framework.auth.service.BasicUserRoleService;
 import com.basic.framework.auth.service.BasicUserService;
@@ -57,11 +57,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("用户名[usernname]为空!");
 		}
 		try {
-			PlatformUser authUser = basicUserService.findUserByCode(username);
+			BasicUser authUser = basicUserService.findUserByCode(username);
 			List<BasicUserRole> userRoles = basicUserRoleService.findByUser(authUser);
 			// 加载用户角色
 			for (BasicUserRole userRole : userRoles) {
-				BasicRole role = userRole.getRoleId();
+				BasicRole role = userRole.getBaseRoled();
 				authorities.add(new SimpleGrantedAuthority(role.getRoleCode()));
 				// 加载角色权限
 				authorizations = basicAuthorizationService.findByRole(role);
@@ -74,7 +74,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				menusMap.put(role.getRoleCode(), menus.size() > 0 ? menus : null);
 			}
 			user = new User(authUser.getUserCode(), authUser.getAccount().getAccPassword(), authorities);
-			authUserEntity = new AuthUserEntity(authUser, userRoles.get(0).getRoleId(), authUser.getAccount(), menusMap, userRoles,
+			authUserEntity = new AuthUserEntity(authUser, userRoles.get(0).getBaseRoled(), authUser.getAccount(), menusMap, userRoles,
 					authorizationMap);
 			basicAuthUserDetails = new BasicAuthUserDetails(user, authUserEntity);
 

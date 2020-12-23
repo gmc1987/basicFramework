@@ -86,10 +86,6 @@ public class BasicUser implements Serializable {
 	private Long lastUpdateBy;
 	
 	@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="user")
-	private Set<BasicUserRole> userRole;
-	
-	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="account_id", insertable=true, updatable=true, nullable=true)
 	private BasicAccount account;
@@ -188,14 +184,6 @@ public class BasicUser implements Serializable {
 
 	public void setOpenId(String openId) {
 		this.openId = openId;
-	}
-
-	public Set<BasicUserRole> getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(Set<BasicUserRole> userRole) {
-		this.userRole = userRole;
 	}
 
 	public BasicAccount getAccount() {

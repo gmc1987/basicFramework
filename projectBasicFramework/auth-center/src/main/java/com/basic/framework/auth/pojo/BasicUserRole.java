@@ -43,26 +43,26 @@ public class BasicUserRole implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	@JoinColumn(name = "userId")
-	private PlatformUser userId;
+	private BasicUser basicUser;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	@JoinColumn(name = "roleId")
-	private BasicRole roleId;
+	private BasicRole baseRole;
 	
-	public PlatformUser getUserId() {
-		return userId;
+	public BasicUser getPlatformUser() {
+		return basicUser;
 	}
 
-	public void setUserId(PlatformUser userId) {
-		this.userId = userId;
+	public void setPlatformUserd(BasicUser basicUser) {
+		this.basicUser = basicUser;
 	}
 
-	public BasicRole getRoleId() {
-		return roleId;
+	public BasicRole getBaseRoled() {
+		return baseRole;
 	}
 
-	public void setRoleId(BasicRole roleId) {
-		this.roleId = roleId;
+	public void setBaseRole(BasicRole baseRole) {
+		this.baseRole = baseRole;
 	}
 
 	public Long getUserRoleId() {
