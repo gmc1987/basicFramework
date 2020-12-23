@@ -17,6 +17,7 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name="basic_account", indexes={@Index(columnList="account_id", unique=true),
+@Table(name="basic_account", indexes={@Index(columnList="id", unique=true),
 										@Index(columnList="account_code", unique=true)})
 public class BasicAccount implements Serializable {
 
@@ -38,7 +39,7 @@ public class BasicAccount implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="account_id", nullable=false, unique=true)
+	@Column(name="id", nullable=false, unique=true)
 	private Long accountId;
 	
 	@Column(name="account_code", length=225, nullable=false)
@@ -48,11 +49,11 @@ public class BasicAccount implements Serializable {
 	private String accountName;
 	
 	@JsonIgnore
-	@Column(length=100, nullable=false)
+	@Column(name = "acc_password", length=100, nullable=false)
 	private String accPassword;
 	
 	@Column(name="sex", length=10, nullable=true)
-	private String sex;
+	private Character accSex;
 	
 	@Column(name="register_date", nullable=false)
 	private Date registerDate;
@@ -80,8 +81,11 @@ public class BasicAccount implements Serializable {
 	
 	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="user_id", insertable=true, updatable=true, nullable=true)
+	@JoinColumn(name="PlatformUserId", insertable=true, updatable=true, nullable=true)
 	private BasicUser user;
+	
+	@Transient
+	private String isFemale;
 
 	public Long getAccountId() {
 		return accountId;
@@ -107,14 +111,18 @@ public class BasicAccount implements Serializable {
 		this.accountName = accountName;
 	}
 
-	public String getSex() {
-		return sex;
+	public Character getAccSex() {
+		return accSex;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setAccSex(Character accSex) {
+		this.accSex = accSex;
+		if(accSex == 'F') {
+			this.isFemale = "女";
+		}else {
+			this.isFemale = "男";
+		}
 	}
-
 	public Date getRegisterDate() {
 		return registerDate;
 	}
@@ -193,6 +201,19 @@ public class BasicAccount implements Serializable {
 
 	public void setAccPassword(String accPassword) {
 		this.accPassword = accPassword;
+	}
+	
+	public String getIsFemale() {
+		if(this.getAccSex() == 'F') {
+			isFemale = "女";
+		} else {
+			isFemale = "男";
+		}
+		return isFemale;
+	}
+
+	public void setIsFemale(String isFemale) {
+		this.isFemale = isFemale;
 	}
 	
 }

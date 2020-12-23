@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name="basic_user",indexes= {@Index(columnList="user_id", unique=true), 
+@Table(name="basic_user",indexes= {@Index(columnList="id", unique=true), 
 								@Index(columnList="user_code", unique=true),
 								@Index(columnList="last_login_date", unique=false),
 								@Index(columnList="user_status", unique=false)})
@@ -41,14 +41,14 @@ public class BasicUser implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long userId;
 	
 	@Column(name="user_code", length=225, nullable=false)
 	private String userCode;
 	
-	@Column(length=225, nullable=false)
-	private String password;
+	@Column(name = "user_name", length=100, nullable=false)
+	private String userName;
 	
 	@Column(name="nick_name", length=255, nullable=false)
 	private String nickName;
@@ -65,7 +65,7 @@ public class BasicUser implements Serializable {
 	/**
 	 * 用户锁定状态 false-未锁定，true-锁定
 	 */
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private boolean isLock;
 	
 	@Column(name="open_id", length=225, nullable=true)
@@ -102,14 +102,6 @@ public class BasicUser implements Serializable {
 
 	public void setUserCode(String userCode) {
 		this.userCode = userCode;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getNickName() {
@@ -190,6 +182,14 @@ public class BasicUser implements Serializable {
 
 	public void setAccount(BasicAccount account) {
 		this.account = account;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }
