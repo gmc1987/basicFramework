@@ -81,7 +81,7 @@ public class BasicAccount implements Serializable {
 	
 	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="PlatformUserId", insertable=true, updatable=true, nullable=true)
+	@JoinColumn(name="user_id", insertable=true, updatable=true, nullable=true)
 	private BasicUser user;
 	
 	@Transient
